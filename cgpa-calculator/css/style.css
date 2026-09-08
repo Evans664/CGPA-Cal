@@ -1,0 +1,125 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    color-scheme: light;
+    font-family: sans-serif;
+    color: #1f2933;
+    background: #f5f7fa;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.screen {
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+.container {
+    width: min(100%, 42rem);
+    margin: 0 auto;
+}
+
+.course-form {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.course-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #9aa5b1;
+    border-radius: 0.25rem;
+}
+
+.primary-button,
+.secondary-button {
+    border: 0;
+    border-radius: 0.25rem;
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+}
+
+.primary-button {
+    color: #ffffff;
+    background: #176b87;
+}
+
+.secondary-button {
+    color: #176b87;
+    background: #d9eef2;
+}
+
+.summary-card,
+.result-card,
+.course-card {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid #d9e2ec;
+    border-radius: 0.25rem;
+    background: #ffffff;
+}
+
+.summary-card {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.course-list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.course-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.error-message {
+    padding: 0.75rem;
+    color: #8a1c1c;
+    background: #fde8e8;
+}
+
+.loading-state {
+    display: grid;
+    place-items: center;
+}
+
+#resultValue {
+    display: block;
+    font-size: 3rem;
+}
+
+@media (min-width: 48rem) {
+    .screen {
+        padding: 4rem 2rem;
+    }
+
+    .course-form {
+        grid-template-columns: repeat(3, 1fr);
+        align-items: end;
+    }
+
+    .course-form label {
+        grid-row: 1;
+    }
+
+    .course-form .primary-button {
+        grid-column: 1 / -1;
+    }
+}

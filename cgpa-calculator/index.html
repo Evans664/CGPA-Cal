@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <section id="welcomeScreen" class="screen">
+            <div class="container">
+                <h1>CGPA Calculator</h1>
+                <p>Calculate your academic performance from your course results.</p>
+                <button id="getStartedButton" class="primary-button" type="button">Get Started</button>
+            </div>
+        </section>
+
+        <section id="calculatorScreen" class="screen" hidden>
+            <div class="container">
+                <h2>Enter your courses</h2>
+                <p id="errorMessage" class="error-message" role="alert" hidden></p>
+
+                <form id="courseForm" class="course-form">
+                    <label for="courseCodeInput">Course code</label>
+                    <input id="courseCodeInput" class="course-input" name="courseCode" type="text" required>
+
+                    <label for="creditUnitInput">Credit units</label>
+                    <input id="creditUnitInput" class="course-input" name="creditUnit" type="number" min="0" required>
+
+                    <label for="gradeInput">Grade</label>
+                    <input id="gradeInput" class="course-input" name="grade" type="text" required>
+
+                    <button id="addCourseButton" class="primary-button" type="submit">Add Course</button>
+                </form>
+
+                <div class="summary-card">
+                    <span>Courses: <strong id="totalCourses">0</strong></span>
+                    <span>Credit units: <strong id="totalCreditUnits">0</strong></span>
+                </div>
+
+                <div id="courseList" class="course-list"></div>
+                <button id="calculateButton" class="primary-button" type="button">Calculate</button>
+            </div>
+        </section>
+
+        <section id="loadingScreen" class="screen" hidden>
+            <div class="container loading-state">
+                <p>Calculating...</p>
+            </div>
+        </section>
+
+        <section id="resultScreen" class="screen" hidden>
+            <div class="container">
+                <h2>Your result</h2>
+                <div class="result-card">
+                    <p>GPA</p>
+                    <strong id="resultValue">-</strong>
+                    <p>Total credit units: <span id="resultTotalCreditUnits">0</span></p>
+                    <p>Total grade points: <span id="resultTotalGradePoints">0</span></p>
+                </div>
+                <div id="courseBreakdown" class="course-list"></div>
+                <button id="resetButton" class="secondary-button" type="button">Calculate again</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
