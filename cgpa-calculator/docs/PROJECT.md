@@ -2,7 +2,7 @@
 
 ## Project Goal
 
-CGPA Calculator is a client-side calculator for the Evans Builds WhatsApp community. It will let users enter course information and calculate GPA from the approved grading configuration.
+CGPA Calculator is a client-side calculator for University of Ibadan undergraduate students in the Evans Builds WhatsApp community. It will let users enter course information and calculate GPA using the University of Ibadan undergraduate 4-point grading system.
 
 ## Target Users
 
@@ -21,7 +21,16 @@ Students and members of the Evans Builds community who need a simple, fast, mobi
 9. Reset
 10. Responsive design
 
-The grading scale is intentionally unresolved. It must be approved by Evans before values are added to `js/data.js`.
+The MVP uses the University of Ibadan undergraduate 4-point grading system. Its single source of truth is `js/data.js`:
+
+| Grade | Grade points | Mark range |
+| --- | ---: | --- |
+| A | 4 | 70% and above |
+| B | 3 | 60-69% |
+| C | 2 | 50-59% |
+| D | 1 | 45-49% |
+| E | 0 | 40-44% |
+| F | 0 | Below 40% |
 
 ## Optional Features
 
@@ -35,7 +44,9 @@ Optional features may be considered after the MVP and only after Evans approves 
 - Authentication
 - Multiple-semester CGPA calculation until its data structure is approved
 - Frameworks or external JavaScript libraries
-- Unapproved grading assumptions
+- Support for grading systems other than the University of Ibadan undergraduate 4-point system
+- University selection
+- Postgraduate grading
 
 ## User Flow
 
