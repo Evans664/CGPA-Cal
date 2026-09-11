@@ -3,20 +3,36 @@ function getGradePoint(grade) {
         return undefined;
     }
 
-    return gradePoints[grade.trim()];
+    return gradePoints[grade.trim().toUpperCase()];
 }
+
 
 function calculateCoursePoints(course) {
-    return getGradePoint(course.grade) * course.creditUnit;
+    const gradePoint = getGradePoint(course.grade);
+
+    if (gradePoint === undefined) {
+        return undefined;
+    }
+
+    return gradePoint * course.creditUnit;
 }
+
 
 function calculateTotalCreditUnits(courses) {
-    return courses.reduce((total, course) => total + course.creditUnit, 0);
+    return courses.reduce((total, course) => {
+        return total + course.creditUnit;
+    }, 0);
 }
 
+
 function calculateTotalGradePoints(courses) {
-    return courses.reduce((total, course) => total + calculateCoursePoints(course), 0);
+    return courses.reduce((total, course) => {
+        const coursePoints = calculateCoursePoints(course);
+
+        return total + coursePoints;
+    }, 0);
 }
+
 
 function calculateGPA(courses) {
     if (!validateCourses(courses)) {
@@ -29,7 +45,7 @@ function calculateGPA(courses) {
         return undefined;
     }
 
-    return calculateTotalGradePoints(courses) / totalCreditUnits;
-}
+    const totalGradePoints = calculateTotalGradePoints(courses);
 
-// TODO: Define the approved multiple-semester data structure before implementing calculateCGPA(...).
+    return totalGradePoints / totalCreditUnits;
+}
