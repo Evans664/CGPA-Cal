@@ -4,7 +4,10 @@ let lastResult = null;
 
 function initializeApp() {
     document.getElementById("getStartedButton").addEventListener("click", () => showScreen("calculatorScreen"));
-    document.getElementById("courseForm").addEventListener("submit", (event) => {
+    document.querySelector(".back-affordance").addEventListener("click", () => showScreen("welcomeScreen"));
+    const courseForm = document.getElementById("courseForm");
+    courseForm.noValidate = true;
+    courseForm.addEventListener("submit", (event) => {
         event.preventDefault();
         addCourse();
     });
@@ -46,13 +49,27 @@ function renderCourses() {
     courses.forEach((course) => {
         const courseCard = document.createElement("article");
         courseCard.className = "course-card";
-        courseCard.innerHTML = `<strong>${course.courseCode}</strong><span>${course.creditUnit} credit units</span><span>${course.grade}</span>`;
+
+        const courseInfo = document.createElement("div");
+        courseInfo.className = "course-card__info";
+
+        const courseTitle = document.createElement("p");
+        courseTitle.className = "course-card__title";
+        courseTitle.textContent = course.courseCode;
+
+        const courseMeta = document.createElement("p");
+        courseMeta.className = "course-card__meta";
+        courseMeta.textContent = `${course.creditUnit} credit units | Grade ${course.grade}`;
+
+        courseInfo.append(courseTitle, courseMeta);
+        courseCard.appendChild(courseInfo);
 
         const actions = document.createElement("div");
         actions.className = "course-actions";
         const removeButton = document.createElement("button");
-        removeButton.className = "secondary-button";
+        removeButton.className = "icon-button icon-button--danger";
         removeButton.type = "button";
+        removeButton.setAttribute("aria-label", `Remove ${course.courseCode}`);
         removeButton.textContent = "Remove";
         removeButton.addEventListener("click", () => removeCourse(course.id));
         actions.appendChild(removeButton);
@@ -61,6 +78,7 @@ function renderCourses() {
     });
 
     document.getElementById("totalCourses").textContent = courses.length;
+    document.getElementById("summaryTotalCourses").textContent = courses.length;
     document.getElementById("totalCreditUnits").textContent = calculateTotalCreditUnits(courses);
 }
 
@@ -85,7 +103,40 @@ function handleCalculate() {
     document.getElementById("resultValue").textContent = gpa.toFixed(2);
     document.getElementById("resultTotalCreditUnits").textContent = totalCreditUnits;
     document.getElementById("resultTotalGradePoints").textContent = totalGradePoints;
+    renderCourseBreakdown();
     showScreen("resultScreen");
+}
+
+function renderCourseBreakdown() {
+    const courseBreakdown = document.getElementById("courseBreakdown");
+    courseBreakdown.innerHTML = "";
+
+    const header = document.createElement("div");
+    header.className = "breakdown-row breakdown-row--head";
+    ["Course", "Units", "Grade", "Points"].forEach((label) => {
+        const cell = document.createElement("span");
+        cell.textContent = label;
+        header.appendChild(cell);
+    });
+    courseBreakdown.appendChild(header);
+
+    courses.forEach((course) => {
+        const row = document.createElement("div");
+        row.className = "breakdown-row";
+
+        const courseCell = document.createElement("span");
+        courseCell.className = "breakdown-row__course";
+        courseCell.textContent = course.courseCode;
+        row.appendChild(courseCell);
+
+        [course.creditUnit, course.grade, calculateCoursePoints(course)].forEach((value) => {
+            const cell = document.createElement("span");
+            cell.textContent = value;
+            row.appendChild(cell);
+        });
+
+        courseBreakdown.appendChild(row);
+    });
 }
 
 function showScreen(screenId) {
