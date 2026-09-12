@@ -3,71 +3,1022 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>CGPA Calculator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <main>
-        <section id="welcomeScreen" class="screen">
-            <div class="container">
-                <h1>CGPA Calculator</h1>
-                <p>Calculate your academic performance from your course results.</p>
-                <button id="getStartedButton" class="primary-button" type="button">Get Started</button>
+
+<main>
+
+    
+    <section id="welcomeScreen" class="screen screen--dark">
+
+        <header class="app-header">
+
+            <div class="brand">
+
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+
+                        <path
+                            d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3Z"
+                            fill="currentColor"
+                        />
+
+                        <path
+                            d="M5 10.18v3.64c0 .35.15.68.42.9C6.6 15.66 8.99 17 12 17s5.4-1.34 6.58-2.28c.27-.22.42-.55.42-.9v-3.64l-7 3.18-7-3.18Z"
+                            fill="currentColor"
+                            opacity=".55"
+                        />
+
+                    </svg>
+                </span>
+
+                <span class="brand-name">CGPA Calculator</span>
+
             </div>
-        </section>
 
-        <section id="calculatorScreen" class="screen" hidden>
-            <div class="container">
-                <h2>Enter your courses</h2>
-                <p id="errorMessage" class="error-message" role="alert" hidden></p>
+            <span class="brand-maker">Evans Builds</span>
 
-                <form id="courseForm" class="course-form">
-                    <label for="courseCodeInput">Course code</label>
-                    <input id="courseCodeInput" class="course-input" name="courseCode" type="text" required>
+        </header>
 
-                    <label for="creditUnitInput">Credit units</label>
-                    <input id="creditUnitInput" class="course-input" name="creditUnit" type="number" min="0" required>
 
-                    <label for="gradeInput">Grade</label>
-                    <input id="gradeInput" class="course-input" name="grade" type="text" required>
+        <div class="screen-body screen-body--center">
 
-                    <button id="addCourseButton" class="primary-button" type="submit">Add Course</button>
-                </form>
+            <div class="hero-badge" aria-hidden="true">
 
-                <div class="summary-card">
-                    <span>Courses: <strong id="totalCourses">0</strong></span>
-                    <span>Credit units: <strong id="totalCreditUnits">0</strong></span>
+                <svg
+                    class="hero-badge__calc"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <rect
+                        x="4"
+                        y="2"
+                        width="16"
+                        height="20"
+                        rx="2.5"
+                        fill="currentColor"
+                        opacity=".18"
+                    />
+
+                    <rect
+                        x="4"
+                        y="2"
+                        width="16"
+                        height="20"
+                        rx="2.5"
+                        stroke="currentColor"
+                        stroke-width="1.4"
+                    />
+
+                    <rect
+                        x="7"
+                        y="5"
+                        width="10"
+                        height="4"
+                        rx="1"
+                        fill="currentColor"
+                    />
+
+                    <circle cx="8" cy="13" r="1.3" fill="currentColor"/>
+                    <circle cx="12" cy="13" r="1.3" fill="currentColor"/>
+                    <circle cx="16" cy="13" r="1.3" fill="currentColor"/>
+
+                    <circle cx="8" cy="17.4" r="1.3" fill="currentColor"/>
+                    <circle cx="12" cy="17.4" r="1.3" fill="currentColor"/>
+                    <circle cx="16" cy="17.4" r="1.3" fill="currentColor"/>
+                </svg>
+
+
+                <svg
+                    class="hero-badge__cap"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3Z"
+                        fill="currentColor"
+                    />
+
+                    <path
+                        d="M5 10.18v3.64c0 .35.15.68.42.9C6.6 15.66 8.99 17 12 17s5.4-1.34 6.58-2.28c.27-.22.42-.55.42-.9v-3.64l-7 3.18-7-3.18Z"
+                        fill="currentColor"
+                    />
+                </svg>
+
+            </div>
+
+
+            <h1 class="hero-heading">
+                Calculate Your CGPA<br>
+                with Ease
+            </h1>
+
+            <p class="hero-lede">
+                Simple. Fast. Accurate.
+            </p>
+
+            <p class="hero-copy">
+                Enter your courses, credit units and grades to get your GPA/CGPA in seconds.
+            </p>
+
+
+            <button
+                id="getStartedButton"
+                class="btn btn--primary btn--block"
+                type="button"
+            >
+                <span>Get Started</span>
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M5 12h13M13 6l6 6-6 6"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+
+            </button>
+
+
+            <ul class="feature-row">
+
+                <li>
+
+                    <span class="feature-icon" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"
+                                fill="currentColor"
+                            />
+                        </svg>
+
+                    </span>
+
+                    Fast Calculation
+
+                </li>
+
+
+                <li>
+
+                    <span class="feature-icon" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" fill="none">
+
+                            <rect
+                                x="7"
+                                y="2"
+                                width="10"
+                                height="20"
+                                rx="2"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                            />
+
+                            <path
+                                d="M11 19h2"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    Mobile Friendly
+
+                </li>
+
+
+                <li>
+
+                    <span class="feature-icon" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" fill="none">
+
+                            <path
+                                d="M12 2 4 5v6c0 5 3.4 8.7 8 10 4.6-1.3 8-5 8-10V5l-8-3Z"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                stroke-linejoin="round"
+                            />
+
+                            <path
+                                d="m9 12 2 2 4-4"
+                                stroke="currentColor"
+                                stroke-width="1.6"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    Accurate Results
+
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <footer class="app-footer">
+
+            <span>
+                Built with
+                <span class="heart" aria-hidden="true">&hearts;</span>
+                by Evans Builds
+            </span>
+
+            <span class="version">v1.0.0</span>
+
+        </footer>
+
+    </section>
+
+    <section id="calculatorScreen" class="screen screen--light" hidden>
+
+        <header class="app-header app-header--light">
+
+            <div class="brand">
+
+                <span class="brand-mark" aria-hidden="true">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+
+                        <path
+                            d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3Z"
+                            fill="currentColor"
+                        />
+
+                        <path
+                            d="M5 10.18v3.64c0 .35.15.68.42.9C6.6 15.66 8.99 17 12 17s5.4-1.34 6.58-2.28c.27-.22.42-.55.42-.9v-3.64l-7 3.18-7-3.18Z"
+                            fill="currentColor"
+                            opacity=".55"
+                        />
+
+                    </svg>
+
+                </span>
+
+                <span class="brand-name">CGPA Calculator</span>
+
+            </div>
+
+            <span class="brand-maker">Evans Builds</span>
+
+        </header>
+
+
+        <div class="screen-body">
+
+            <button
+                type="button"
+                class="back-affordance"
+                aria-label="Go back"
+            >
+
+                <svg viewBox="0 0 24 24" fill="none">
+
+                    <path
+                        d="M19 12H5M11 6l-6 6 6 6"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+
+                </svg>
+
+            </button>
+
+
+            <h2 class="screen-heading">
+                Enter Your Courses
+            </h2>
+
+            <p class="screen-copy">
+                Add your courses, credit units and grades.
+                You can add or remove courses as needed.
+            </p>
+
+
+            <p
+                id="errorMessage"
+                class="error-message"
+                role="alert"
+                hidden
+            ></p>
+
+
+            <form id="courseForm" class="course-form">
+
+                <div class="field field--wide">
+
+                    <label for="courseCodeInput">
+                        Course Code / Name
+                    </label>
+
+                    <input
+                        id="courseCodeInput"
+                        class="course-input"
+                        name="courseCode"
+                        type="text"
+                        placeholder="Course Code / Name"
+                        required
+                    >
+
                 </div>
 
-                <div id="courseList" class="course-list"></div>
-                <button id="calculateButton" class="primary-button" type="button">Calculate</button>
-            </div>
-        </section>
 
-        <section id="loadingScreen" class="screen" hidden>
-            <div class="container loading-state">
-                <p>Calculating...</p>
-            </div>
-        </section>
+                <div class="field">
 
-        <section id="resultScreen" class="screen" hidden>
-            <div class="container">
-                <h2>Your result</h2>
-                <div class="result-card">
-                    <p>GPA</p>
-                    <strong id="resultValue">-</strong>
-                    <p>Total credit units: <span id="resultTotalCreditUnits">0</span></p>
-                    <p>Total grade points: <span id="resultTotalGradePoints">0</span></p>
+                    <label for="creditUnitInput">
+                        Credit Units
+                    </label>
+
+                    <input
+                        id="creditUnitInput"
+                        class="course-input"
+                        name="creditUnit"
+                        type="number"
+                        min="0"
+                        placeholder="Credit Units"
+                        required
+                    >
+
                 </div>
-                <div id="courseBreakdown" class="course-list"></div>
-                <button id="resetButton" class="secondary-button" type="button">Calculate again</button>
-            </div>
-        </section>
-    </main>
 
-    <script src="js/data.js"></script>
-    <script src="js/validation.js"></script>
-    <script src="js/calculator.js"></script>
-    <script src="js/app.js"></script>
+
+                <div class="field">
+
+                    <label for="gradeInput">
+                        Grade
+                    </label>
+
+                    <select
+                        id="gradeInput"
+                        class="course-input course-input--select"
+                        name="grade"
+                        required
+                    >
+
+                        <option value="" disabled selected>
+                            Grade
+                        </option>
+
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    id="addCourseButton"
+                    class="btn btn--outline-blue btn--block"
+                    type="submit"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="M12 5v14M5 12h14"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                        />
+
+                    </svg>
+
+                    <span>Add Course</span>
+
+                </button>
+
+            </form>
+
+
+            <div class="list-heading">
+
+                <h3>Your Courses</h3>
+
+                <span class="list-count">
+                    <strong id="totalCourses">0</strong>
+                    courses
+                </span>
+
+            </div>
+
+
+            <!-- JavaScript will add courses here -->
+            <div
+                id="courseList"
+                class="course-list"
+            ></div>
+
+
+            <div class="summary-card">
+
+                <p class="summary-card__title">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                    >
+
+                        <rect
+                            x="3"
+                            y="7"
+                            width="18"
+                            height="13"
+                            rx="2"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                        />
+
+                        <path
+                            d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                        />
+
+                    </svg>
+
+                    Summary
+
+                </p>
+
+
+                <div class="summary-card__row">
+
+                    <span>Total Courses:</span>
+
+                    <strong id="summaryTotalCourses">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-card__row">
+
+                    <span>Total Credit Units:</span>
+
+                    <strong id="totalCreditUnits">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="calculateButton"
+                class="btn btn--primary btn--block"
+                type="button"
+            >
+
+                <span>Calculate CGPA</span>
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M5 12h13M13 6l6 6-6 6"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+
+                </svg>
+
+            </button>
+
+        </div>
+
+
+        <footer class="app-footer app-footer--light">
+
+            <span>
+                Built with
+                <span class="heart" aria-hidden="true">&hearts;</span>
+                by Evans Builds
+            </span>
+
+            <span class="version">v1.0.0</span>
+
+        </footer>
+
+    </section>
+
+
+
+    <!-- =========================
+         LOADING SCREEN
+    ========================== -->
+    <section id="loadingScreen" class="screen screen--dark" hidden>
+
+        <header class="app-header">
+
+            <div class="brand">
+
+                <span class="brand-mark" aria-hidden="true">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+
+                        <path
+                            d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3Z"
+                            fill="currentColor"
+                        />
+
+                        <path
+                            d="M5 10.18v3.64c0 .35.15.68.42.9C6.6 15.66 8.99 17 12 17s5.4-1.34 6.58-2.28c.27-.22.42-.55.42-.9v-3.64l-7 3.18-7-3.18Z"
+                            fill="currentColor"
+                            opacity=".55"
+                        />
+
+                    </svg>
+
+                </span>
+
+                <span class="brand-name">
+                    CGPA Calculator
+                </span>
+
+            </div>
+
+            <span class="brand-maker">
+                Evans Builds
+            </span>
+
+        </header>
+
+
+        <div class="screen-body screen-body--center">
+
+            <div
+                class="spinner"
+                role="status"
+                aria-live="polite"
+                aria-label="Calculating"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    class="spinner__icon"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3Z"
+                        fill="currentColor"
+                    />
+
+                    <path
+                        d="M5 10.18v3.64c0 .35.15.68.42.9C6.6 15.66 8.99 17 12 17s5.4-1.34 6.58-2.28c.27-.22.42-.55.42-.9v-3.64l-7 3.18-7-3.18Z"
+                        fill="currentColor"
+                    />
+
+                </svg>
+
+            </div>
+
+
+            <h2 class="loading-heading">
+                Calculating Your CGPA&hellip;
+            </h2>
+
+            <p class="hero-copy">
+                Please wait while we process your results.
+            </p>
+
+
+            <ul class="checklist">
+
+                <li class="checklist__item checklist__item--done">
+
+                    <span class="checklist__icon" aria-hidden="true">
+
+                        <svg viewBox="0 0 24 24" fill="none">
+
+                            <path
+                                d="m5 13 4 4 10-10"
+                                stroke="currentColor"
+                                stroke-width="2.2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+
+                        </svg>
+
+                    </span>
+
+                    Validating your inputs
+
+                </li>
+
+
+                <li class="checklist__item checklist__item--active">
+
+                    <span
+                        class="checklist__icon"
+                        aria-hidden="true"
+                    ></span>
+
+                    Processing grade points
+
+                </li>
+
+
+                <li class="checklist__item checklist__item--pending">
+
+                    <span
+                        class="checklist__icon"
+                        aria-hidden="true"
+                    ></span>
+
+                    Calculating GPA/CGPA
+
+                </li>
+
+
+                <li class="checklist__item checklist__item--pending">
+
+                    <span
+                        class="checklist__icon"
+                        aria-hidden="true"
+                    ></span>
+
+                    Preparing your result
+
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <footer class="app-footer">
+
+            <span>
+                Built with
+                <span class="heart" aria-hidden="true">&hearts;</span>
+                by Evans Builds
+            </span>
+
+            <span class="version">
+                v1.0.0
+            </span>
+
+        </footer>
+
+    </section>
+
+
+
+    <!-- =========================
+         RESULT SCREEN
+    ========================== -->
+    <section id="resultScreen" class="screen screen--light" hidden>
+
+        <header class="app-header app-header--light">
+
+            <div class="brand">
+
+                <span class="brand-mark" aria-hidden="true">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+
+                        <path
+                            d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3Z"
+                            fill="currentColor"
+                        />
+
+                        <path
+                            d="M5 10.18v3.64c0 .35.15.68.42.9C6.6 15.66 8.99 17 12 17s5.4-1.34 6.58-2.28c.27-.22.42-.55.42-.9v-3.64l-7 3.18-7-3.18Z"
+                            fill="currentColor"
+                            opacity=".55"
+                        />
+
+                    </svg>
+
+                </span>
+
+                <span class="brand-name">
+                    CGPA Calculator
+                </span>
+
+            </div>
+
+            <span class="brand-maker">
+                Evans Builds
+            </span>
+
+        </header>
+
+
+        <div class="screen-body">
+
+            <div class="status-banner">
+
+                <span
+                    class="status-banner__icon"
+                    aria-hidden="true"
+                >
+
+                    <svg viewBox="0 0 24 24" fill="none">
+
+                        <path
+                            d="m5 13 4 4 10-10"
+                            stroke="currentColor"
+                            stroke-width="2.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+
+                    </svg>
+
+                </span>
+
+
+                <div>
+
+                    <p class="status-banner__title">
+                        Calculation Complete!
+                    </p>
+
+                    <p class="status-banner__copy">
+                        Here&rsquo;s your CGPA result.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="result-card">
+
+                <p class="result-card__label">
+                    Your CGPA
+                </p>
+
+                <strong
+                    id="resultValue"
+                    class="result-card__value"
+                >
+                    -
+                </strong>
+
+                <span class="pill">
+                    Good Standing
+                </span>
+
+            </div>
+
+
+            <div class="stat-grid">
+
+                <div class="stat-card">
+
+                    <p class="stat-card__label">
+                        Total Credit Units
+                    </p>
+
+                    <p
+                        class="stat-card__value"
+                        id="resultTotalCreditUnits"
+                    >
+                        0
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <p class="stat-card__label">
+                        Total Grade Points
+                    </p>
+
+                    <p
+                        class="stat-card__value"
+                        id="resultTotalGradePoints"
+                    >
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <h3 class="breakdown-heading">
+                Course Breakdown
+            </h3>
+
+
+            <!-- JavaScript will populate this section -->
+            <div
+                id="courseBreakdown"
+                class="breakdown-card"
+            ></div>
+
+
+            <div class="callout">
+
+                <span
+                    class="callout__icon"
+                    aria-hidden="true"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                    >
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="9"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                        />
+
+                        <path
+                            d="M12 11v5"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            stroke-linecap="round"
+                        />
+
+                        <circle
+                            cx="12"
+                            cy="8.2"
+                            r="1"
+                            fill="currentColor"
+                        />
+
+                    </svg>
+
+                </span>
+
+
+                <p>
+                    <strong>Keep it up!</strong>
+                    Your result is ready. Keep working towards your academic goals.
+                </p>
+
+            </div>
+
+
+            <button
+                id="resetButton"
+                class="btn btn--primary btn--block"
+                type="button"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M4 4v5h5M20 20v-5h-5"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+
+                    <path
+                        d="M5.5 15a7 7 0 0 0 12.3 2.5M18.5 9A7 7 0 0 0 6.2 6.5"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+
+                </svg>
+
+                <span>
+                    Calculate Again
+                </span>
+
+            </button>
+
+
+            <button
+                id="saveResultButton"
+                type="button"
+                class="btn btn--outline-blue btn--block"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M12 3v12m0 0 4-4m-4 4-4-4"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+
+                    <path
+                        d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+
+                </svg>
+
+                <span>
+                    Save Result
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <footer class="app-footer app-footer--light">
+
+            <span>
+                Built with
+                <span class="heart" aria-hidden="true">&hearts;</span>
+                by Evans Builds
+            </span>
+
+            <span class="version">
+                v1.0.0
+            </span>
+
+        </footer>
+
+    </section>
+
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/calculator.js"></script>
+<script src="js/app.js"></script>
+
 </body>
 </html>
